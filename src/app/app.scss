@@ -1,0 +1,187 @@
+
+$primary: #5CEFFF;
+$secondary: #FFFFFF;
+$text: #1D292B;
+$tittle:  #FFFFFF;
+$border-radius: 12px;
+$border-color: #B9CCCF;
+$event: #B8D4FF;
+
+
+
+.calendar-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  color: $text;
+}
+
+h1 {
+    color: $tittle;
+    font-size: 40px;
+}
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background-color: $secondary;
+  border-radius: $border-radius;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(29, 41, 43, 0.05);
+  border: 1px solid #83A5AA; //borde del calendario
+
+  .header {
+    background-color: $text;
+    color: $tittle;
+    font-weight: 700;
+    text-align: center;
+    padding: 1rem 0.5rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid $border-color;
+  }
+
+  .day-cell {
+    min-height: 140px;
+    padding: 10px;
+    background-color: $secondary;
+    border-right: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+
+    &:nth-child(7n) { border-right: none; }
+
+    &:hover:not(.empty) {
+      background-color: rgba(166, 243, 255, 0.2);
+    }
+
+    &.empty {
+      background-color: #f9fbfb;
+    }
+
+    .day-number {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      display: block;
+      color: $text;
+    }
+  }
+}
+
+.event-tag {
+  background-color: $event;
+  color: $text;
+  font-size: 0.75rem;
+  padding: 6px 10px;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  border: 1px solid transparent;
+
+  &:hover {
+    background-color: lighten($text, 10%);
+  }
+}
+
+// responsive
+@media (max-width: 768px) {
+  .calendar-grid {
+    .day-cell {
+      min-height: 80px;
+      padding: 5px;
+      
+      .day-number {
+        font-size: 0.9rem;
+      }
+    }
+    
+    .header {
+      font-size: 0.7rem;
+      padding: 0.5rem 0;
+    }
+  }
+
+  .event-tag {
+    font-size: 0.65rem;
+    padding: 2px 4px;
+    border-radius: 4px;
+  }
+}
+
+.event-tag {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  background-color: $text;
+  color: $secondary;
+  border-radius: 10px;
+  padding: 4px 8px;
+  margin-top: 4px;
+
+  .event-text {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .btn-delete {
+    background: rgba($primary, 0.2);
+    border: none;
+    color: $primary;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.2s;
+
+    &:hover {
+      background: #ff4d4d; 
+      color: white;
+    }
+  }
+}
+
+.calendar-header-actions {
+  display: flex;
+  justify-content: space-between; //buscar para centrar el titulo luego y desplazar el boton de vaciar
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0 1rem;
+}
+
+.btn-clear {
+  background-color: transparent;
+  color : $secondary;  
+  border: 2px solid $secondary;
+  padding: 8px 16px;
+  border-radius: 15px;  
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: $text;
+    color: white;
+    border: 2px solid #ff4d4d;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
