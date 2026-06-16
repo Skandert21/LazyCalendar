@@ -1,0 +1,13 @@
+<div class="events-list-root">
+  <h2>Eventos guardados</h2>
+
+  <p class="muted" *ngIf="sortedEvents().length === 0">No hay eventos guardados.</p>
+
+  <ul class="events-list" *ngIf="sortedEvents().length > 0">
+    <li class="event-row" *ngFor="let ev of sortedEvents()">
+      <div class="event-title">{{ ev.title }}</div>
+      <div class="event-date">{{ formatDate(ev.date) }}</div>
+      <button class="row-delete" (click)="removeEvent(ev, $event)">Eliminar</button>
+    </li>
+  </ul>
+</div>

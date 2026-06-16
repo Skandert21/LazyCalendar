@@ -46,4 +46,30 @@ clearAllEvents() {
   this.events.set([]);
  
 }
+
+  // navigation helpers
+  prevMonth() {
+    const d = this.selectedDate();
+    this.selectedDate.set(new Date(d.getFullYear(), d.getMonth() - 1, 1));
+  }
+
+  nextMonth() {
+    const d = this.selectedDate();
+    this.selectedDate.set(new Date(d.getFullYear(), d.getMonth() + 1, 1));
+  }
+
+  prevYear() {
+    const d = this.selectedDate();
+    this.selectedDate.set(new Date(d.getFullYear() - 1, d.getMonth(), 1));
+  }
+
+  nextYear() {
+    const d = this.selectedDate();
+    this.selectedDate.set(new Date(d.getFullYear() + 1, d.getMonth(), 1));
+  }
+
+  goToToday() {
+    const now = new Date();
+    this.selectedDate.set(new Date(now.getFullYear(), now.getMonth(), 1));
+  }
 }

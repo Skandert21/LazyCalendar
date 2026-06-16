@@ -1,6 +1,20 @@
 <div class="calendar-header-actions">
   <h1>{{ title() }}</h1>
-  <button class="btn-clear" (click)="clearCalendar()">Vaciar Calendario</button>
+
+  <div class="header-controls">
+    <div class="calendar-nav">
+      <button class="nav-btn" (click)="calendar.prevYear()">«</button>
+      <button class="nav-btn" (click)="calendar.prevMonth()">‹</button>
+      <div class="calendar-current">{{ monthLabel() }}</div>
+      <button class="nav-btn" (click)="calendar.nextMonth()">›</button>
+      <button class="nav-btn" (click)="calendar.nextYear()">»</button>
+    </div>
+
+    <div class="header-actions-right">
+      <button class="btn" (click)="calendar.goToToday()">Hoy</button>
+      <button class="btn-clear" (click)="clearCalendar()">Vaciar Calendario</button>
+    </div>
+  </div>
 </div>
 
 <div class="calendar-grid">
@@ -27,4 +41,18 @@
       }
     </div>
   }
+</div>
+
+<!-- Floating button to open events list -->
+<button class="fab" (click)="showEvents.set(!showEvents())">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 21v-3.75L17.81 2.44a1 1 0 0 1 1.42 0l1.33 1.33a1 1 0 0 1 0 1.42L6.75 20.99H3z" fill="#fff"/>
+  </svg>
+</button>
+
+<div *ngIf="showEvents()" class="modal-backdrop" (click)="showEvents.set(false)">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <button class="modal-close" (click)="showEvents.set(false)">×</button>
+    <event-list></event-list>
+  </div>
 </div>

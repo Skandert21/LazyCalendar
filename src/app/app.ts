@@ -1,12 +1,13 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { calendar } from './components/calendar'; 
 import { RouterOutlet } from '@angular/router';
+import { EventList } from './components/event-list';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterOutlet, EventList],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -14,6 +15,15 @@ export class App {
  
   protected calendar = inject(calendar);
   protected readonly title = signal('Lazy Calendar v1');
+  protected showEvents = signal(false);
+  protected monthLabel = computed(() => {
+    const d = this.calendar.selectedDate();
+    try {
+      return d.toLocaleString('es-ES', { month: 'long' }).replace(/\b./, s => s.toUpperCase()) + ' ' + d.getFullYear();
+    } catch {
+      return `${d.getMonth() + 1}/${d.getFullYear()}`;
+    }
+  });
 
   getEventsForDay(day: Date | null) {
     if (!day) return [];
